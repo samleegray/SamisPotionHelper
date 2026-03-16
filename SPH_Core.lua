@@ -4,7 +4,7 @@ local SPH = SamisPotionHelperAddon
 
 SPH.name = "SamisPotionHelper"
 SPH.displayName = "Sami's Potion Helper"
-SPH.version = "1.0.0"
+SPH.version = "1.0.1"
 SPH.author = "samihaize"
 
 -- Seeded effect tables (work in progress)
