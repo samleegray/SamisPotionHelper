@@ -43,24 +43,21 @@ jobs:
 
       - name: Create zip file
         run: |
-          mkdir -p SamisFishTracker
-          cp SamisFishTracker.lua \
-            SamisFishTracker.txt \
-            SamisFishTracker.xml \
-            SFT_Commands.lua \
-            SFT_Core.lua \
-            SFT_Inventory.lua \
-            SFT_UI.lua \
-            SFT_Settings.lua \
-            SFT_Utils.lua \
-            SamisFishTracker/
-          zip -r SamisFishTracker.zip SamisFishTracker/
+          mkdir -p SamisPotionHelper
+          cp SamisPotionHelper.lua \
+            SamisPotionHelper.txt \
+            SPH_Core.lua \
+            SPH_Settings.lua \
+            SPH_Utils.lua \
+            SamiDebug.lua \
+            SamisPotionHelper/
+          zip -r SamisPotionHelper.zip SamisPotionHelper/
             
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          files: SamisFishTracker.zip
+          files: SamisPotionHelper.zip
           draft: false
           prerelease: false
         env:
