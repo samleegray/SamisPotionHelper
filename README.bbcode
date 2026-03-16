@@ -1,0 +1,48 @@
+[SIZE=5][B]Sami's Potion Helper[/B][/SIZE]
+
+An Elder Scrolls Online addon that automatically manages potions in your backpack. When you open your inventory, it scans your bag and marks any non-crafted, sellable potions as junk — keeping your inventory clean while preserving potions you made yourself.
+
+[SIZE=4][B]Features[/B][/SIZE]
+
+[LIST]
+[*][B]Auto-junk non-crafted potions[/B] — Any sellable potion that was not player-crafted is automatically marked as junk when you open your inventory.
+[*][B]Crafted potion caching[/B] — Crafted potions are tracked by slot index for quick lookup.
+[*][B]Potion effect categorisation[/B] — Internal effect mask table covers common potion types (Heroism, Tri-Stat, Bi-Stat, Endurance, Unstoppable, Physical/Spell/Dual Resists).
+[*][B]Settings panel[/B] — Configurable via LibAddonMenu-2.0, with a debug-message toggle.
+[/LIST]
+
+[SIZE=4][B]Dependencies[/B][/SIZE]
+
+[TABLE]
+[TR][TH]Library[/TH][TH]Version[/TH][/TR]
+[TR][TD][URL=https://www.esoui.com/downloads/info7-LibAddonMenu.html]LibAddonMenu-2.0[/URL][/TD][TD]≥ 41[/TD][/TR]
+[/TABLE]
+
+[SIZE=4][B]Settings[/B][/SIZE]
+
+Open [B]Settings → Addons → SamisPotionHelper[/B] to access:
+
+[TABLE]
+[TR][TH]Option[/TH][TH]Default[/TH][TH]Description[/TH][/TR]
+[TR][TD]Enable Debug[/TD][TD]Off[/TD][TD]Print debug messages to the chat window[/TD][/TR]
+[/TABLE]
+
+[SIZE=4][B]How It Works[/B][/SIZE]
+
+[LIST=1]
+[*]When the inventory scene opens, the addon iterates through every slot in [FONT=Courier New]BAG_BACKPACK[/FONT].
+[*]Each potion item is checked:
+[LIST]
+[*]If it was [B]crafted[/B] (has a creator name), its link is cached.
+[*]If it is [B]non-crafted and sellable[/B], it is immediately flagged as junk.
+[/LIST]
+[*]The cached potion list is updated on every inventory open.
+[/LIST]
+
+[SIZE=4][B]Version[/B][/SIZE]
+
+1.0.0
+
+[SIZE=4][B]Author[/B][/SIZE]
+
+samihaize
