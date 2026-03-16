@@ -1,0 +1,16 @@
+## Title: SamisPotionHelper
+## Version: 1.0.0
+## APIVersion: 101049
+## AddOnVersion: 3
+## Author: |cf939dasamihaize|r
+## Description: Helps you manage your potions.
+## IsLibrary: false
+## SavedVariables: SamisPotionHelperSavedVariables
+## DependsOn: LibAddonMenu-2.0>=41
+## OptionalDependsOn: LibSlashCommander>=45
+
+SamiDebug.lua
+SPH_Core.lua
+SPH_Settings.lua
+SPH_Utils.lua
+SamisPotionHelper.lua
