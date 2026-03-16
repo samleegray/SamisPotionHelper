@@ -33,12 +33,22 @@ function SPH.OnInventoryStateChange(oldState, newState)
   end
 end
 
+function SPH.Initialize()
+  SAMID:Print("Initializing Samis Potion Helper...")
+
+  SPH.savedVariables = ZO_SavedVars:NewAccountWide("SamisPotionHelperSavedVariables", 1, nil, {
+    enableDebug = false,
+  })
+
+  SPH.InitializeSettings()
+end
+
 function SPH.OnAddOnLoaded(_, addonName)
   if addonName ~= SPH.name then
     return
   end
 
-  SAMID:Print("SPH: OnAddOnLoaded called with addonName: " .. tostring(addonName))
+  SPH.Initialize()
 
   EVENT_MANAGER:UnregisterForEvent(SPH.name, EVENT_ADD_ON_LOADED)
   SCENE_MANAGER:GetScene("inventory"):RegisterCallback("StateChange", SPH.OnInventoryStateChange)

@@ -21,19 +21,11 @@ function SPH.InitializeSettings()
     },
     {
       type = "checkbox",
-      name = "Enable Notifications",
-      tooltip = "Toggle potion-related notifications on or off.",
-      getFunc = function() return SPH.savedVariables.enableNotifications end,
-      setFunc = function(value) SPH.savedVariables.enableNotifications = value end,
-      default = true,
-    },
-    {
-      type = "checkbox",
-      name = "Show Potion Effects",
-      tooltip = "Display active potion effects in the UI.",
-      getFunc = function() return SPH.savedVariables.showPotionEffects end,
-      setFunc = function(value) SPH.savedVariables.showPotionEffects = value end,
-      default = true,
+      name = "Enable Debug",
+      tooltip = "Toggle debug messages.",
+      getFunc = function() return SPH.savedVariables.enableDebug end,
+      setFunc = function(value) SPH.savedVariables.enableDebug = value end,
+      default = false,
     },
   }
 
