@@ -22,10 +22,10 @@ jobs:
           echo "version=$TAG_VERSION" >> $GITHUB_OUTPUT
           echo "Tag version: $TAG_VERSION"
 
-      - name: Extract addon version from SFT_Core.lua
+      - name: Extract addon version from SPH_Core.lua
         id: addon_version
         run: |
-          ADDON_VERSION=$(grep -oP 'version = "\K[^"]+' SFT_Core.lua)
+          ADDON_VERSION=$(grep -oP 'version = "\K[^"]+' SPH_Core.lua)
           echo "version=$ADDON_VERSION" >> $GITHUB_OUTPUT
           echo "Addon version: $ADDON_VERSION"
 
