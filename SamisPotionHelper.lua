@@ -8,12 +8,10 @@ local function iterateThroughEntireBag()
   local newLinks = {}
 
   while slotIndex do
-    slotIndex = ZO_GetNextBagSlotIndex(bagId, slotIndex)
-
     local itemLink = GetItemLink(bagId, slotIndex, 1)
     if itemLink and GetItemLinkItemType(itemLink) == ITEMTYPE_POTION then
       SAMID:Print("Found potion in bag: " .. itemLink)
-      if SPH.utils.isCrafted(bagId, slotIndex) then
+      if IsItemLinkCrafted(itemLink) then
         SAMID:Print("Caching crafted potion: " .. itemLink)
         newLinks[slotIndex] = itemLink
       elseif SPH.utils.isSellable(bagId, slotIndex) then
@@ -21,6 +19,7 @@ local function iterateThroughEntireBag()
         SetItemIsJunk(bagId, slotIndex, true)
       end
     end
+    slotIndex = ZO_GetNextBagSlotIndex(bagId, slotIndex)
   end
 
   SAMID:Print("Finished iterating through bag. Caching potions: " .. tostring(newLinks))
