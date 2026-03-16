@@ -47,6 +47,7 @@ jobs:
           cp SamisPotionHelper.lua \
             SamisPotionHelper.txt \
             SPH_Core.lua \
+            SPH_Settings.lua \
             SPH_Utils.lua \
             SamiDebug.lua \
             SamisPotionHelper/

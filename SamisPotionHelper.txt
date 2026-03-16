@@ -11,5 +11,6 @@
 
 SamiDebug.lua
 SPH_Core.lua
+SPH_Settings.lua
 SPH_Utils.lua
 SamisPotionHelper.lua
