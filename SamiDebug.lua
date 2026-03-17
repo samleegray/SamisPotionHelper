@@ -1,6 +1,6 @@
-SamiDebug = SamiDebug or {}
+SamisAddonsDebugHelpers = SamisAddonsDebugHelpers or {}
 
-local SAMID = SamiDebug
+local SAMID = SamisAddonsDebugHelpers
 local SPH = SamisPotionHelperAddon
 
 function SAMID:Print(...)

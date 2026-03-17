@@ -1,5 +1,6 @@
 local SPH = SamisPotionHelperAddon
 local LAM2 = LibAddonMenu2
+local SPHUtils = SPH.utils
 
 function SPH.InitializeSettings()
   local panelData = {
@@ -32,7 +33,10 @@ function SPH.InitializeSettings()
       name = "Filter Food & Drink",
       tooltip = "Also filter crafted food and junk non-crafted food and drink.",
       getFunc = function() return SPH.savedVariables.filterFood end,
-      setFunc = function(value) SPH.savedVariables.filterFood = value end,
+      setFunc = function(value)
+        SPH.savedVariables.filterFood = value
+        SPHUtils.syncSavedVarsToUtils()
+      end,
       default = true,
     },
     {
@@ -40,8 +44,33 @@ function SPH.InitializeSettings()
       name = "Filter Poisons",
       tooltip = "Also junk non-crafted poison items.",
       getFunc = function() return SPH.savedVariables.filterPoisons end,
-      setFunc = function(value) SPH.savedVariables.filterPoisons = value end,
+      setFunc = function(value)
+        SPH.savedVariables.filterPoisons = value
+        SPHUtils.syncSavedVarsToUtils()
+      end,
       default = true,
+    },
+    {
+      type = "checkbox",
+      name = "Filter Merchant Items",
+      tooltip = "Also junk non-crafted sellable merchant trash items.",
+      getFunc = function() return SPH.savedVariables.filterMerchantItems end,
+      setFunc = function(value)
+        SPH.savedVariables.filterMerchantItems = value
+        SPHUtils.syncSavedVarsToUtils()
+      end,
+      default = true,
+    },
+    {
+      type = "checkbox",
+      name = "Auto Sell Trash Items",
+      tooltip = "Automatically sell junk items when opening a merchant store.",
+      getFunc = function() return SPH.savedVariables.autoSellTrash end,
+      setFunc = function(value)
+        SPH.savedVariables.autoSellTrash = value
+        SPH.RegisterEvents()
+      end,
+      default = false,
     },
   }
 
