@@ -1,14 +1,14 @@
 [SIZE=5][B]Sami's Potion Helper[/B][/SIZE]
 
-An Elder Scrolls Online addon that automatically manages potions in your backpack. When you open your inventory, it scans your bag and marks any non-crafted, sellable potions as junk — keeping your inventory clean while preserving potions you made yourself.
+An Elder Scrolls Online addon that automatically manages consumables in your backpack. When you open your inventory, it scans your bag and marks non-crafted, sellable items as junk based on your enabled filters (potions always, with optional food/drink and poisons).
 
 [SIZE=4][B]Features[/B][/SIZE]
 
 [LIST]
 [*][B]Auto-junk non-crafted potions[/B] — Any sellable potion that was not player-crafted is automatically marked as junk when you open your inventory.
-[*][B]Crafted potion caching[/B] — Crafted potions are tracked by slot index for quick lookup.
-[*][B]Potion effect categorisation[/B] — Internal effect mask table covers common potion types (Heroism, Tri-Stat, Bi-Stat, Endurance, Unstoppable, Physical/Spell/Dual Resists).
-[*][B]Settings panel[/B] — Configurable via LibAddonMenu-2.0, with a debug-message toggle.
+[*][B]Optional food & drink filtering[/B] — When enabled, non-crafted sellable food and drink are also marked as junk.
+[*][B]Optional poison filtering[/B] — When enabled, non-crafted sellable poisons are also marked as junk.
+[*][B]Settings panel[/B] — Configurable via LibAddonMenu-2.0, including debug and filter toggles.
 [/LIST]
 
 [SIZE=4][B]Dependencies[/B][/SIZE]
@@ -23,23 +23,26 @@ Open [B]Settings → Addons → SamisPotionHelper[/B] to access:
 
 [LIST]
 [*][B]Enable Debug[/B] (default: Off) — Print debug messages to the chat window
+[*][B]Filter Food & Drink[/B] (default: On) — Also junk non-crafted, sellable food and drink
+[*][B]Filter Poisons[/B] (default: On) — Also junk non-crafted, sellable poisons
 [/LIST]
 
 [SIZE=4][B]How It Works[/B][/SIZE]
 
 [LIST=1]
 [*]When the inventory scene opens, the addon iterates through every slot in [FONT=Courier New]BAG_BACKPACK[/FONT].
-[*]Each potion item is checked:
+[*]Each item is checked against enabled filters:
 [LIST]
-[*]If it was [B]crafted[/B] (has a creator name), its link is cached.
-[*]If it is [B]non-crafted and sellable[/B], it is immediately flagged as junk.
+[*][B]Potions[/B] are always considered.
+[*][B]Food & Drink[/B] are considered when the setting is enabled.
+[*][B]Poisons[/B] are considered when the setting is enabled.
 [/LIST]
-[*]The cached potion list is updated on every inventory open.
+[*]Matching items are marked junk only if they are [B]non-crafted and sellable[/B].
 [/LIST]
 
 [SIZE=4][B]Version[/B][/SIZE]
 
-1.0.0
+v1.0.1
 
 [SIZE=4][B]Author[/B][/SIZE]
 

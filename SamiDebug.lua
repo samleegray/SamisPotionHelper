@@ -1,10 +1,10 @@
 SamiDebug = SamiDebug or {}
 
 local SAMID = SamiDebug
-local debug = false
+local SPH = SamisPotionHelperAddon
 
 function SAMID:Print(...)
-  if not debug then return end
+  if not SPH.savedVariables or not SPH.savedVariables.enableDebug then return end
 
   local message = string.format(...)
   d("[SAMI DEBUG]: " .. message)

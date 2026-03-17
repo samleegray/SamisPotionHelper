@@ -27,6 +27,22 @@ function SPH.InitializeSettings()
       setFunc = function(value) SPH.savedVariables.enableDebug = value end,
       default = false,
     },
+    {
+      type = "checkbox",
+      name = "Filter Food & Drink",
+      tooltip = "Also filter crafted food and junk non-crafted food and drink.",
+      getFunc = function() return SPH.savedVariables.filterFood end,
+      setFunc = function(value) SPH.savedVariables.filterFood = value end,
+      default = true,
+    },
+    {
+      type = "checkbox",
+      name = "Filter Poisons",
+      tooltip = "Also junk non-crafted poison items.",
+      getFunc = function() return SPH.savedVariables.filterPoisons end,
+      setFunc = function(value) SPH.savedVariables.filterPoisons = value end,
+      default = true,
+    },
   }
 
   LAM2:RegisterOptionControls(SPH.name .. "Options", optionsData)

@@ -8,8 +8,8 @@
 ## SavedVariables: SamisPotionHelperSavedVariables
 ## DependsOn: LibAddonMenu-2.0>=41
 
-SamiDebug.lua
 SPH_Core.lua
+SamiDebug.lua
 SPH_Settings.lua
 SPH_Utils.lua
 SamisPotionHelper.lua

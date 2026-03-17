@@ -1,29 +1,37 @@
 local SPH = SamisPotionHelperAddon
 local SAMID = SamiDebug
 
+local function isFoodOrDrink(itemType)
+  return itemType == ITEMTYPE_FOOD or itemType == ITEMTYPE_DRINK
+end
+
 local function iterateThroughEntireBag()
   SAMID:Print("Iterating through entire bag to find potions...")
   local bagId = BAG_BACKPACK
   local slotIndex = ZO_GetNextBagSlotIndex(bagId, 0)
-  local newLinks = {}
+  local shouldFilterFood = SPH.savedVariables and SPH.savedVariables.filterFood
+  local shouldFilterPoisons = SPH.savedVariables and SPH.savedVariables.filterPoisons
 
   while slotIndex do
     local itemLink = GetItemLink(bagId, slotIndex, 1)
-    if itemLink and GetItemLinkItemType(itemLink) == ITEMTYPE_POTION then
-      SAMID:Print("Found potion in bag: " .. itemLink)
-      if IsItemLinkCrafted(itemLink) then
-        SAMID:Print("Caching crafted potion: " .. itemLink)
-        newLinks[slotIndex] = itemLink
-      elseif SPH.utils.isSellable(bagId, slotIndex) then
-        SAMID:Print("Marking non-crafted potion as junk: " .. itemLink)
-        SetItemIsJunk(bagId, slotIndex, true)
+
+    if itemLink then
+      local isCrafted = IsItemLinkCrafted(itemLink)
+      local isSellable = SPH.utils.isSellable(bagId, slotIndex)
+      local itemType = itemLink and GetItemLinkItemType(itemLink)
+
+      if (shouldFilterFood and isFoodOrDrink(itemType)) or itemType == ITEMTYPE_POTION or (shouldFilterPoisons and itemType == ITEMTYPE_POISON) then
+        if not isCrafted and isSellable then
+          SAMID:Print("Marking non-crafted food or potion as junk: " .. itemLink)
+          SetItemIsJunk(bagId, slotIndex, true)
+        end
       end
     end
+
     slotIndex = ZO_GetNextBagSlotIndex(bagId, slotIndex)
   end
 
-  SAMID:Print("Finished iterating through bag. Caching potions: " .. tostring(newLinks))
-  SPH.utils.cachePotions(newLinks)
+  SAMID:Print("Finished iterating through bag.")
 end
 
 function SPH.OnInventoryStateChange(oldState, newState)
@@ -33,11 +41,13 @@ function SPH.OnInventoryStateChange(oldState, newState)
 end
 
 function SPH.Initialize()
-  SAMID:Print("Initializing Samis Potion Helper...")
-
   SPH.savedVariables = ZO_SavedVars:NewAccountWide("SamisPotionHelperSavedVariables", 1, nil, {
     enableDebug = false,
+    filterFood = true,
+    filterPoisons = true,
   })
+
+  SAMID:Print("Initializing Samis Potion Helper...")
 
   SPH.InitializeSettings()
 end
