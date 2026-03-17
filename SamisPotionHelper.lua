@@ -1,5 +1,5 @@
 local SPH = SamisPotionHelperAddon
-local SAMID = SamiDebug
+local SAMID = SamisAddonsDebugHelpers
 local SPHUtils = SPH.utils
 
 local function iterateThroughEntireBag()
