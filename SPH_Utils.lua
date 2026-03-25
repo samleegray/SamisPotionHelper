@@ -7,7 +7,8 @@ SPH.utils = {
     [ITEMTYPE_POTION] = true,
     [ITEMTYPE_POISON] = true,
     [ITEMTYPE_TRASH] = true,
-  }
+  },
+  sellAlliancePotions = true,
 }
 
 function SPH.utils.syncSavedVarsToUtils()
@@ -17,6 +18,7 @@ function SPH.utils.syncSavedVarsToUtils()
   SPH.utils.filteredItemTypes[ITEMTYPE_DRINK] = SPH.savedVariables.filterFood
   SPH.utils.filteredItemTypes[ITEMTYPE_POISON] = SPH.savedVariables.filterPoisons
   SPH.utils.filteredItemTypes[ITEMTYPE_TRASH] = SPH.savedVariables.filterMerchantItems
+  SPH.utils.sellAlliancePotions = SPH.savedVariables.sellAlliancePotions
 end
 
 function SPH.utils.getItemTotalSellPrice(bagId, slotIndex)
@@ -26,11 +28,22 @@ function SPH.utils.getItemTotalSellPrice(bagId, slotIndex)
   return stack * sellPrice
 end
 
+
+
 function SPH.utils.isSellable(bagId, slotIndex)
   local icon, stack, sellPrice, meetsUsageRequirement, locked, equipType, itemStyleId, quality = GetItemInfo(bagId,
     slotIndex)
 
   return sellPrice > 0 and not locked
+end
+
+function SPH.utils.isAlliancePotion(itemLink)
+  if not itemLink then
+    return false
+  end
+
+  local itemName = string.lower(zo_strformat(SI_TOOLTIP_ITEM_NAME, GetItemLinkName(itemLink)))
+  return string.find(itemName, "alliance") ~= nil
 end
 
 function SPH.utils.shouldFlagAsJunk(bagId, slotIndex)
@@ -50,6 +63,10 @@ function SPH.utils.shouldFlagAsJunk(bagId, slotIndex)
   end
 
   local itemType = GetItemLinkItemType(itemLink)
+
+  if itemType == ITEMTYPE_POTION and SPH.utils.isAlliancePotion(itemLink) then
+    return SPH.utils.sellAlliancePotions
+  end
 
   if SPH.utils.filteredItemTypes[itemType] then
     return true

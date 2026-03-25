@@ -52,6 +52,17 @@ function SPH.InitializeSettings()
     },
     {
       type = "checkbox",
+      name = "Sell Alliance Potions",
+      tooltip = "If enabled, non-crafted Alliance War potions can be junked/sold.",
+      getFunc = function() return SPH.savedVariables.sellAlliancePotions end,
+      setFunc = function(value)
+        SPH.savedVariables.sellAlliancePotions = value
+        SPHUtils.syncSavedVarsToUtils()
+      end,
+      default = true,
+    },
+    {
+      type = "checkbox",
       name = "Filter Merchant Items",
       tooltip = "Also junk non-crafted sellable merchant trash items.",
       getFunc = function() return SPH.savedVariables.filterMerchantItems end,

@@ -51,7 +51,7 @@ function SPH.RegisterEvents()
 end
 
 local function initialize()
-  SPH.savedVariables = ZO_SavedVars:NewAccountWide("SamisPotionHelperSavedVariables", 1, nil, SPH.savedVariablesDefaults)
+  SPH.savedVariables = ZO_SavedVars:NewAccountWide("SamisPotionHelperSavedVariables", 1, nil, SPH.savedVariableDefaults)
 
   SAMID:Print("Initializing Samis Potion Helper...")
 
