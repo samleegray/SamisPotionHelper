@@ -25,7 +25,10 @@ function SPH.utils.syncSavedVarsToUtils()
   SPH.utils.customFilters = {}
   if SPH.savedVariables.customFilterText and SPH.savedVariables.customFilterText ~= "" then
     for filterText in string.gmatch(SPH.savedVariables.customFilterText, "([^,\n]+)") do
-      local trimmedFilter = string.match(filterText, "^%s*(.-)%s*$")
+      -- Skip the first space after a comma, but preserve spaces within the token
+      local afterCommaSpace = string.gsub(filterText, "^ ", "", 1)
+      -- Trim remaining leading and trailing spaces
+      local trimmedFilter = string.match(afterCommaSpace, "^%s*(.-)%s*$")
       if trimmedFilter ~= "" then
         table.insert(SPH.utils.customFilters, string.lower(trimmedFilter))
       end
@@ -85,7 +88,7 @@ function SPH.utils.markItemAsTrash(bagId, slotIndex, itemLink)
   -- Track if this is a new item
   if not SPH.savedVariables.markedTrashItems[lowerItemName] then
     SPH.savedVariables.markedTrashItems[lowerItemName] = true
-    d(SPH.displayName .. ": Marked as trash - " .. itemName)
+    d(SPH.displayName .. ": Marked as trash - " .. itemLink)
   end
 
   -- Mark the item as junk
