@@ -1,5 +1,5 @@
 ## Title: SamisPotionHelper
-## Version: 1.1.1
+## Version: 1.2.0
 ## APIVersion: 101049
 ## AddOnVersion: 4
 ## Author: |cf939dasamihaize|r

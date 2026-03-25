@@ -4,7 +4,7 @@ local SPH = SamisPotionHelperAddon
 
 SPH.name = "SamisPotionHelper"
 SPH.displayName = "Sami's Potion Helper"
-SPH.version = "1.1.1"
+SPH.version = "1.2.0"
 SPH.author = "samihaize"
 
 SPH.savedVariableDefaults = {
