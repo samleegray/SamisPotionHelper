@@ -14,7 +14,7 @@ local function iterateThroughEntireBag()
       local itemTotalSellPrice = SPHUtils.getItemTotalSellPrice(bagId, slotIndex)
       totalTrashSellPrice = totalTrashSellPrice + itemTotalSellPrice
       SAMID:Print("Marking item as junk: " .. itemLink .. " (Total Sell Price: " .. itemTotalSellPrice .. ")")
-      SetItemIsJunk(bagId, slotIndex, true)
+      SPHUtils.markItemAsTrash(bagId, slotIndex, itemLink)
     end
 
     slotIndex = ZO_GetNextBagSlotIndex(bagId, slotIndex)

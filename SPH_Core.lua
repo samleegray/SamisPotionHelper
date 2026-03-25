@@ -15,4 +15,5 @@ SPH.savedVariableDefaults = {
   sellAlliancePotions = false,
   autoSellTrash = false,
   customFilterText = "",
+  markedTrashItems = {},
 }

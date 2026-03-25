@@ -72,6 +72,26 @@ function SPH.utils.matchesCustomFilter(itemLink)
   return false
 end
 
+function SPH.utils.markItemAsTrash(bagId, slotIndex, itemLink)
+  if not itemLink then
+    itemLink = GetItemLink(bagId, slotIndex, 1)
+  end
+
+  if not itemLink then return end
+
+  local itemName = zo_strformat(SI_TOOLTIP_ITEM_NAME, GetItemLinkName(itemLink))
+  local lowerItemName = string.lower(itemName)
+
+  -- Track if this is a new item
+  if not SPH.savedVariables.markedTrashItems[lowerItemName] then
+    SPH.savedVariables.markedTrashItems[lowerItemName] = true
+    d(SPH.displayName .. ": Marked as trash - " .. itemName)
+  end
+
+  -- Mark the item as junk
+  SetItemIsJunk(bagId, slotIndex, true)
+end
+
 function SPH.utils.shouldFlagAsJunk(bagId, slotIndex)
   if not SPH.utils.isSellable(bagId, slotIndex) then
     return false
@@ -84,7 +104,7 @@ function SPH.utils.shouldFlagAsJunk(bagId, slotIndex)
 
   -- Check custom filter first
   if SPH.utils.matchesCustomFilter(itemLink) then
-    return true
+    return false
   end
 
   local isCrafted = IsItemLinkCrafted(itemLink)
