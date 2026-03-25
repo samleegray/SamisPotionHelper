@@ -14,7 +14,7 @@ local function iterateThroughEntireBag()
       local itemTotalSellPrice = SPHUtils.getItemTotalSellPrice(bagId, slotIndex)
       totalTrashSellPrice = totalTrashSellPrice + itemTotalSellPrice
       SAMID:Print("Marking item as junk: " .. itemLink .. " (Total Sell Price: " .. itemTotalSellPrice .. ")")
-      SetItemIsJunk(bagId, slotIndex, true)
+      SPHUtils.markItemAsTrash(bagId, slotIndex, itemLink)
     end
 
     slotIndex = ZO_GetNextBagSlotIndex(bagId, slotIndex)
@@ -51,7 +51,7 @@ function SPH.RegisterEvents()
 end
 
 local function initialize()
-  SPH.savedVariables = ZO_SavedVars:NewAccountWide("SamisPotionHelperSavedVariables", 1, nil, SPH.savedVariablesDefaults)
+  SPH.savedVariables = ZO_SavedVars:NewAccountWide("SamisPotionHelperSavedVariables", 1, nil, SPH.savedVariableDefaults)
 
   SAMID:Print("Initializing Samis Potion Helper...")
 

@@ -4,7 +4,7 @@ local SPH = SamisPotionHelperAddon
 
 SPH.name = "SamisPotionHelper"
 SPH.displayName = "Sami's Potion Helper"
-SPH.version = "1.1.0"
+SPH.version = "1.2.0"
 SPH.author = "samihaize"
 
 SPH.savedVariableDefaults = {
@@ -12,5 +12,8 @@ SPH.savedVariableDefaults = {
   filterFood = true,
   filterPoisons = true,
   filterMerchantItems = true,
+  sellAlliancePotions = false,
   autoSellTrash = false,
+  customFilterText = "",
+  markedTrashItems = {},
 }

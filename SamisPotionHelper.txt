@@ -1,7 +1,7 @@
 ## Title: SamisPotionHelper
-## Version: 1.1.0
+## Version: 1.2.0
 ## APIVersion: 101049
-## AddOnVersion: 3
+## AddOnVersion: 4
 ## Author: |cf939dasamihaize|r
 ## Description: Helps you manage your potions.
 ## IsLibrary: false
