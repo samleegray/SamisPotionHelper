@@ -83,6 +83,19 @@ function SPH.InitializeSettings()
       end,
       default = false,
     },
+    {
+      type = "editbox",
+      name = "Custom Filter",
+      tooltip =
+      "Enter item names to filter (separated by commas). Items containing any of these texts will *NOT* be marked as junk.",
+      getFunc = function() return SPH.savedVariables.customFilterText end,
+      setFunc = function(value)
+        SPH.savedVariables.customFilterText = value
+        SPHUtils.syncSavedVarsToUtils()
+      end,
+      multiline = true,
+      default = "",
+    },
   }
 
   LAM2:RegisterOptionControls(SPH.name .. "Options", optionsData)

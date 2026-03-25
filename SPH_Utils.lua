@@ -9,6 +9,7 @@ SPH.utils = {
     [ITEMTYPE_TRASH] = true,
   },
   sellAlliancePotions = true,
+  customFilters = {},
 }
 
 function SPH.utils.syncSavedVarsToUtils()
@@ -19,6 +20,17 @@ function SPH.utils.syncSavedVarsToUtils()
   SPH.utils.filteredItemTypes[ITEMTYPE_POISON] = SPH.savedVariables.filterPoisons
   SPH.utils.filteredItemTypes[ITEMTYPE_TRASH] = SPH.savedVariables.filterMerchantItems
   SPH.utils.sellAlliancePotions = SPH.savedVariables.sellAlliancePotions
+
+  -- Parse custom filter text
+  SPH.utils.customFilters = {}
+  if SPH.savedVariables.customFilterText and SPH.savedVariables.customFilterText ~= "" then
+    for filterText in string.gmatch(SPH.savedVariables.customFilterText, "([^,\n]+)") do
+      local trimmedFilter = string.match(filterText, "^%s*(.-)%s*$")
+      if trimmedFilter ~= "" then
+        table.insert(SPH.utils.customFilters, string.lower(trimmedFilter))
+      end
+    end
+  end
 end
 
 function SPH.utils.getItemTotalSellPrice(bagId, slotIndex)
@@ -27,8 +39,6 @@ function SPH.utils.getItemTotalSellPrice(bagId, slotIndex)
   if locked then return 0 end
   return stack * sellPrice
 end
-
-
 
 function SPH.utils.isSellable(bagId, slotIndex)
   local icon, stack, sellPrice, meetsUsageRequirement, locked, equipType, itemStyleId, quality = GetItemInfo(bagId,
@@ -46,6 +56,22 @@ function SPH.utils.isAlliancePotion(itemLink)
   return string.find(itemName, "alliance") ~= nil
 end
 
+function SPH.utils.matchesCustomFilter(itemLink)
+  if not itemLink or #SPH.utils.customFilters == 0 then
+    return false
+  end
+
+  local itemName = string.lower(zo_strformat(SI_TOOLTIP_ITEM_NAME, GetItemLinkName(itemLink)))
+
+  for _, filterPattern in ipairs(SPH.utils.customFilters) do
+    if string.find(itemName, filterPattern, 1, true) then
+      return true
+    end
+  end
+
+  return false
+end
+
 function SPH.utils.shouldFlagAsJunk(bagId, slotIndex)
   if not SPH.utils.isSellable(bagId, slotIndex) then
     return false
@@ -54,6 +80,11 @@ function SPH.utils.shouldFlagAsJunk(bagId, slotIndex)
   local itemLink = GetItemLink(bagId, slotIndex, 1)
   if not itemLink then
     return false
+  end
+
+  -- Check custom filter first
+  if SPH.utils.matchesCustomFilter(itemLink) then
+    return true
   end
 
   local isCrafted = IsItemLinkCrafted(itemLink)

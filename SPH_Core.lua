@@ -14,4 +14,5 @@ SPH.savedVariableDefaults = {
   filterMerchantItems = true,
   sellAlliancePotions = false,
   autoSellTrash = false,
+  customFilterText = "",
 }
