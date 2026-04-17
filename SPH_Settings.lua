@@ -74,6 +74,16 @@ function SPH.InitializeSettings()
     },
     {
       type = "checkbox",
+      name = "Flag Stolen Items As Trash",
+      tooltip = "If disabled, stolen items will never be marked as junk.",
+      getFunc = function() return SPH.savedVariables.flagStolenItemsAsTrash end,
+      setFunc = function(value)
+        SPH.savedVariables.flagStolenItemsAsTrash = value
+      end,
+      default = false,
+    },
+    {
+      type = "checkbox",
       name = "Auto Sell Trash Items",
       tooltip = "Automatically sell junk items when opening a merchant store.",
       getFunc = function() return SPH.savedVariables.autoSellTrash end,

@@ -100,6 +100,11 @@ function SPH.utils.shouldFlagAsJunk(bagId, slotIndex)
     return false
   end
 
+  local shouldFlagStolenItems = SPH.savedVariables and SPH.savedVariables.flagStolenItemsAsTrash
+  if shouldFlagStolenItems == false and IsItemStolen and IsItemStolen(bagId, slotIndex) then
+    return false
+  end
+
   local itemLink = GetItemLink(bagId, slotIndex, 1)
   if not itemLink then
     return false

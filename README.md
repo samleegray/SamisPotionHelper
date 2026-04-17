@@ -8,8 +8,10 @@ An Elder Scrolls Online addon that automatically manages consumables in your bac
 - **Optional food & drink filtering** — When enabled, non-crafted sellable food and drink are also marked as junk.
 - **Optional poison filtering** — When enabled, non-crafted sellable poisons are also marked as junk.
 - **Optional merchant item filtering** — When enabled, non-crafted sellable merchant trash/priority-sell items are also marked as junk.
+- **Optional stolen item junking** — When enabled, stolen items can be marked as junk; disable to always keep stolen items out of junk.
 - **Optional auto-sell at merchants** — When enabled, all junk is sold automatically when opening a store.
 - **Settings panel** — Configurable via LibAddonMenu-2.0, including debug, filter, and auto-sell toggles.
+- **Optional stolen item junking** — When enabled, stolen items can be marked as junk; disable to always keep stolen items out of junk.
 
 ## Dependencies
 
@@ -27,6 +29,7 @@ Open **Settings → Addons → SamisPotionHelper** to access:
 | Filter Food & Drink | On | Also junk non-crafted, sellable food and drink |
 | Filter Poisons | On | Also junk non-crafted, sellable poisons |
 | Filter Merchant Items | On | Also junk non-crafted, sellable merchant trash items |
+| Flag Stolen Items As Trash | On | If Off, stolen items are never marked as junk |
 | Auto Sell Trash Items | Off | Automatically sell junk items when opening a merchant store |
 
 ## How It Works
@@ -37,6 +40,7 @@ Open **Settings → Addons → SamisPotionHelper** to access:
    - **Food & Drink** are considered when the setting is enabled.
    - **Poisons** are considered when the setting is enabled.
    - **Merchant Items** are considered when the setting is enabled.
+   - **Stolen items** are skipped when "Flag Stolen Items As Trash" is disabled.
 3. Matching items are marked junk only if they are **non-crafted and sellable**.
 4. If **Auto Sell Trash Items** is enabled, opening a merchant store will sell all junk automatically.
 
