@@ -5,10 +5,11 @@ local SPHUtils = SPH.utils
 function SPH.InitializeSettings()
   local panelData = {
     type = "panel",
-    name = SPH.name,
+    name = SPH.displayName,
     displayName = SPH.displayName,
-    author = SPH.author,
+    author = SPH.styledAuthor,
     version = SPH.version,
+    website = "https://lethalrejection.com",
     registerForRefresh = true,
     registerForDefaults = true,
   }
