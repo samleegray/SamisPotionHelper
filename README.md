@@ -46,11 +46,14 @@ Open **Settings → Addons → SamisPotionHelper** to access:
 
 ## Version
 
-`1.1.0`
+`1.3.1`
 
 ## Author
 
 samihaize
+
+## Website
+[Lethal Rejection Guild](https://lethalrejection.com)
 
 ## License
 
